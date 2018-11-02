@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		}
 		if ($result->num_rows === 0) {
 			$hashed = hash('whirlpool', $_POST['passwd']);
-			$sql = "INSERT INTO users (email, login, passwd) VALUES ('". ($_POST['email'])."','".$_POST['login']."', '$hashed')";
+			$sql = "INSERT INTO users (email, login, passwd, token) VALUES ('". ($_POST['email'])."','".$_POST['login']."', '$hashed' , '".substr(sha1(mt_rand()),17,6)."')";
 			if ($con->query($sql) === TRUE) {
 				echo "New record created successfully";
 				mail($_POST['email'],"Confirm Email",$msg, $headers);
