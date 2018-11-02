@@ -9,7 +9,7 @@ require_once('auth.php');
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-	$con=mysqli_connect("localhost","camagru","password","camagru");
+	$con=mysqli_connect("localhost","camagru","password","password");
 	$login = $_POST['email'];
 	$passwd = $_POST['passwd'];
 	if ($login && $passwd && auth($login, $passwd))
