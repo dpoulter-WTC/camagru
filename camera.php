@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="camera.css" type="text/css" media="all">
   <script src="camera.js"></script>
+  <?php
+  include_once('redirect.php');
+  ?>
 </head>
 <body>
   <div class="camera">
@@ -16,6 +19,5 @@
   <div class="output">
     <img id="photo" alt="The screen capture will appear in this box.">
   </div>
-  <a href="#" class="button" id="btn-download">Download</a>
 </body>
 </html>

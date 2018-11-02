@@ -1,13 +1,23 @@
 <?php
 function auth($login, $passwd)
 {
-  if (!file_exists('../private/passwd'))
-  return false;
-  $logins = unserialize(file_get_contents('../private/passwd'));
-  $hashed = hash('whirlpool', $passwd);
-  foreach ($logins as $k => $v)
-  if ($v['login'] == $login && $v['passwd'] == $hashed)
-  return true;
-  return false;
+	$con=mysqli_connect("localhost","camagru","password","camagru");
+	if (mysqli_connect_errno())
+	{
+		echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+	$sql = "SELECT * FROM users WHERE email = '" . $login ."'";
+	$result = $con->query($sql);
+	if (!$result) {
+	    trigger_error('Invalid query: ' . $con->error);
+	}
+	if ($result->num_rows === 1) {
+		while($row = $result->fetch_assoc()) {
+			$hashed = hash('whirlpool', $passwd);
+			if ($login == $row["email"] && $hashed == $row["passwd"])
+				return true;
+		}
+	}
+	return false;
 }
 ?>
