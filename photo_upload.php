@@ -8,7 +8,12 @@ list(, $data)      = explode(',', $data);
 $data = base64_decode($data);
 echo 'hi';
 echo $_SESSION['curr_user'];
-file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/photos/".$_SESSION['curr_user'].time().'.jpeg', $data);
+$counter = 0;
+while (file_exists($_SESSION['curr_user'] . $counter))
+{
+  $counter++;
+}
+file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/photos/".$_SESSION['curr_user'].$counter++.'.jpeg', $data);
 
 die;
 ?>

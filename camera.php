@@ -9,6 +9,9 @@
   ?>
 </head>
 <body>
+  <?php
+  session_start();
+  ?>
   <div class="camera">
     <video id="video">Video stream not available.</video>
     <button id="startbutton">Take photo</button>
@@ -18,6 +21,18 @@
   </canvas>
   <div class="output">
     <img id="photo" alt="The screen capture will appear in this box.">
+  </div>
+  <div class="row">
+    <div class="column">
+      <?php
+      $counter = 0;
+      while (file_exists($_SESSION['curr_user'] . $counter))
+      {
+        echo '<img src="'. $_SESSION['curr_user'] . $counter .'">';
+        $counter++;
+      }
+      ?>
+    </div>
   </div>
 </body>
 </html>
