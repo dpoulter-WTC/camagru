@@ -28,16 +28,14 @@
 		$result = $con->query($sql);
 		if ($result->num_rows === 1) {
 			while($row = $result->fetch_assoc()) {
-				$user = $row[''];
-				$image_url = $row['url'];
-				$date = $row['creation_date'];
+				$name = $row['login'];
 			}
 		}
 		else {
 			echo "404: Image not found!";
 		}
 		echo '<img src="' . $image_url . '">' . "\n";
-		echo $user . "\n";
+		echo $name . "\n";
 		echo $date . "\n";
 	?>
 
