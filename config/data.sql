@@ -20,7 +20,8 @@ CREATE TABLE if not exists `camagru`.`photos` (
   `id` INT UNIQUE NOT NULL AUTO_INCREMENT,
   `userid` INT NOT NULL,
   `url` VARCHAR(100) UNIQUE NOT NULL,
-  `likes` INT NOT NULL,
+  `likes` INT NOT NULL DEFAULT 0,
+  `comments` INT NOT NULL DEFAULT 0,
   `creation_date` DATE NOT NULL,
   PRIMARY KEY (`id`)
 );
@@ -29,4 +30,9 @@ CREATE TABLE if not exists `camagru`.`comments` (
   `userid` INT NOT NULL,
   `imgid` INT NOT NULL,
   `content` VARCHAR(140) NOT NULL
+);
+
+CREATE TABLE if not exists `camagru`.`likes` (
+  `userid` INT NOT NULL,
+  `imgid` INT NOT NULL
 );
