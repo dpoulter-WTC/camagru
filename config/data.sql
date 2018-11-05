@@ -13,6 +13,7 @@ CREATE TABLE if not exists `camagru`.`users` (
   `profile_pic` VARCHAR(100) NOT NULL DEFAULT 'resources/profile/profile.jpg',
   `token` VARCHAR(10) UNIQUE NOT NULL,
   `confirmed` BOOLEAN DEFAULT false,
+  `email_notif` BOOLEAN DEFAULT true,
   PRIMARY KEY (`id`, `login`)
 );
 
