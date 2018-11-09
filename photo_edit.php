@@ -4,8 +4,17 @@
 
 <p>Image to use:</p>
 <img id="original" src="resources/profile/profile.jpg" alt="Original Image">
-<img id="sticker1" width="100" height="100" src="resources/stickers/BuyMeStuff.png" alt="Sticker 1">
-<img id="sticker2" width="100" height="100" src="resources/stickers/BlackCat.png" alt="Sticker 2">
+
+<label>
+  <input type="radio" name="test" value="small" checked>
+  <img width="100" height="100" src="resources/stickers/BuyMeStuff.png">
+</label>
+<label>
+  <input type="radio" name="test" value="big">
+  <img width="100" height="100" src="resources/stickers/BlackCat.png">
+</label>
+
+
 <img id="sticker3" width="100" height="100" src="resources/stickers/ColourSkull.png" alt="Sticker 3">
 <img id="sticker4" width="100" height="100" src="resources/stickers/CrystalWolf.png" alt="Sticker 4">
 <img id="sticker5" width="100" height="100" src="resources/stickers/DabbingSquidward.png" alt="Sticker 5">
@@ -19,7 +28,7 @@
 <img id="sticker13" width="100" height="100" src="resources/stickers/WatercolourFlower.png" alt="Sticker 13">
 
 <p>Canvas:</p>
-<canvas id="myCanvas" width="240" height="297" style="border:1px solid #d3d3d3;">
+<canvas id="myCanvas" width="400" height="400" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.
 </canvas>
 
