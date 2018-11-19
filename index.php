@@ -43,9 +43,6 @@ if(!isset($_SESSION))
     text-align: center;
   }
 
-  * {
-    box-sizing: border-box;
-  }
 
   .responsive {
     padding: 0 6px;

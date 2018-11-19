@@ -1,27 +1,13 @@
 (function() {
-  var width = 500;
-  var height = 500;
+  var width = 800;
+  var height = 600;
   var streaming = false;
   var video = null;
   var canvas = null;
   var photo = null;
   var startbutton = null;
-  var filter = null;
   var cont = null;
-  let filterIndex = 0;
-  const filters = [
-    'grayscale(1)',
-    'sepia(1)',
-    'blur(3px)',
-    'brightness(5)',
-    'contrast(8)',
-    'hue-rotate(90deg)',
-    'hue-rotate(180deg)',
-    'hue-rotate(270deg)',
-    'saturate(10)',
-    'invert(1)',
-    ''
-  ];
+
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
@@ -29,7 +15,6 @@
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
     cont = document.getElementById('continue');
-    filter = document.getElementById('filter');
     navigator.getMedia = ( navigator.getUserMedia ||
       navigator.webkitGetUserMedia ||
       navigator.mozGetUserMedia ||
@@ -77,16 +62,6 @@
 
       cont.addEventListener('click', function(ev){
         move_on();
-      }, false);
-
-      filter.addEventListener('click', function(ev){
-        if (filterIndex > 11)
-        filterIndex = 0;
-        document.getElementById("video").style.filter = filters[filterIndex];
-        document.getElementById("photo").style.filter = filters[filterIndex];
-        document.getElementById("canvas").style.filter = filters[filterIndex];
-        filterIndex++;
-
       }, false);
       clearphoto();
     }

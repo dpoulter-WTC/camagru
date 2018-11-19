@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="style/style.css"/>
 	<title>Create</title>
 	<script src="create.js"></script>
 </head>
@@ -60,8 +61,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$sql = "INSERT INTO users (email, login, passwd, token) VALUES ('". ($_POST['email'])."','".$_POST['login']."', '$hashed' , '$code')";
 			if ($con->query($sql) === TRUE) {
 				echo "New record created successfully";
-				mail($_POST['email'],"Confirm Email",$msg, $headers);
-				header('Refresh: 0; URL=login.php');
+				$success = mail($_POST['email'],"Confirm Email",$msg, $headers);
+				if (!$success) {
+					$errorMessage = error_get_last()['message'];
+				} else {
+					header('Refresh: 0; URL=login.php');
+				}
+
 			} else {
 				echo "Error: " . $sql . "<br>" . $con->error;
 			}
@@ -73,20 +79,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 }
 ?>
 <body>
+	<?php
+	include_once('header.php');
+	?>
 	<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST" id = "form">
-			<h1>Register</h1><br>
-			<label for="email"><b>Email</b></label>
-			<input type="email" placeholder="Enter Email" name="email" id="email" required>
-			<br />
-			<label for="login"><b>Username</b></label>
-			<input type="text" placeholder="Enter Username" name="login" id="login" required>
-			<br />
-			<label for="passwd"><b>Password</b></label>
-			<input type="password" placeholder="Enter Password" name="passwd" id="passwd" required>
-			<br />
-			<label for="cpasswd"><b>Confirm</b></label>
-			<input type="password" placeholder="Confirm Password" name="cpasswd" id="cpasswd" required>
-			<button type=button id="register">Register</button>
+		<h1>Register</h1><br>
+		<label for="email"><b>Email</b></label>
+		<input type="email" placeholder="Enter Email" name="email" id="email" required>
+		<br />
+		<label for="login"><b>Username</b></label>
+		<input type="text" placeholder="Enter Username" name="login" id="login" required>
+		<br />
+		<label for="passwd"><b>Password</b></label>
+		<input type="password" placeholder="Enter Password" name="passwd" id="passwd" required>
+		<br />
+		<label for="cpasswd"><b>Confirm</b></label>
+		<input type="password" placeholder="Confirm Password" name="cpasswd" id="cpasswd" required>
+		<button type=button id="register">Register</button>
 	</form>
 </body>
 </html>

@@ -43,7 +43,7 @@
   }
   ?>
   <button onclick="addBorder(ctx)">Add Border</button>
-  <button onclick="ctx.drawImage(original, 1, 1, 500, 500)">Reset</button>
+  <button onclick="ctx.drawImage(original, -83.33, 0, 666.66666666, 500)">Reset</button>
   <button onclick="saveImage()">Save Image</button>
 
   <p>Canvas:</p>
@@ -56,7 +56,7 @@
     c = document.getElementById("myCanvas");
     ctx = c.getContext("2d");
     var img = document.getElementById("original");
-    ctx.drawImage(img, 1, 1, 500, 500);
+    ctx.drawImage(img, -83.33, 0, 666.66666666, 500);
   }
   function addSticker(ctx, position)
   {

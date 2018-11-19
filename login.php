@@ -1,11 +1,15 @@
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="style/style.css"/>
 	<title>Login</title>
 </head>
 <?php
+if(!isset($_SESSION))
+{
+	session_start();
+}
 require_once('auth.php');
-session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	include('connect.php');
@@ -35,6 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 }
 ?>
 <body>
+	<?php
+	include_once('header.php');
+	?>
 	<h2>Login</h2>
 	<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
 		Email : <input type="text" name="email" value="" id="email" required/><br />
