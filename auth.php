@@ -1,7 +1,7 @@
 <?php
 function auth($login, $passwd)
 {
-	$con=mysqli_connect("localhost","camagru","password","camagru");
+	include('connect.php');
 	if (mysqli_connect_errno())
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -15,9 +15,12 @@ function auth($login, $passwd)
 		while($row = $result->fetch_assoc()) {
 			$hashed = hash('whirlpool', $passwd);
 			if ($login == $row["email"] && $hashed == $row["passwd"])
-				return true;
+				if ($row["confirmed"] == 0)
+					return 2;
+				else
+					return 1;
 		}
 	}
-	return false;
+	return 0;
 }
 ?>

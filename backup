@@ -1,0 +1,22 @@
+<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
+	<div class="mid_box">
+		<h1>Register</h1><br>
+		<label for="email"><b>Email</b></label>
+		<input type="email" placeholder="Enter Email" name="email" required>
+		<br />
+		<label for="login"><b>Username</b></label>
+		<input type="text" placeholder="Enter Username" name="login" required>
+		<br />
+		<label for="passwd"><b>Password</b></label>
+		<input type="password" placeholder="Enter Password" name="passwd" required>
+		<br />
+		<label for="cpasswd"><b>Confirm</b></label>
+		<input type="password" placeholder="Confirm Password" name="cpasswd" required>
+		<?php if ($error != "")
+		{
+			echo "<b style='color:red;>'".$error."</b><br/>";
+		}
+		?>
+		<button id="register">Register</button>
+	</div>
+</form>
