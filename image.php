@@ -52,7 +52,7 @@
 				$emailid = "SELECT userid FROM photos WHERE id = '" . $img_id ."'";
 				$emailresult = $con->query($emailid);
 				while($row100 = $emailresult->fetch_assoc()) {
-					$user_id2 = $row100['id'];
+					$user_id2 = $row100['userid'];
 				}
 
 				$emailcon = "SELECT * FROM users WHERE id = '" . $user_id2 ."'";
@@ -60,6 +60,7 @@
 				while($row100 = $emailresultcon->fetch_assoc()) {
 					$con = $row100['notification'];
 					$username = $row100['login'];
+					$email = $row100['email'];
 				}
 
 				if ($con == 1)
@@ -75,13 +76,20 @@
 					</br>
 					<p>You have got a new comment on you photo:</p>
 					</br>
-					<a href=http://$_SERVER[HTTP_HOST]$up/images.php?img_id=$img_id>Check it out now</a>
+					<a href=http://$_SERVER[HTTP_HOST]$up/image.php?img_id=$img_id>Check it out now</a>
 					</body>
 					</html>
 					";
 				}
-				$success = mail($_POST['email'],"Confirm Email",$msg, $headers);
-				header("Refresh: 0; URL=image.php?img_id=$img_id");
+				$headers = "MIME-Version: 1.0" . "\r\n";
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+				$success = mail($email ,"Confirm Email",$msg, $headers);
+				if (!$success) {
+					$errorMessage = error_get_last()['message'];
+				} else {
+					header("Refresh: 0; URL=image.php?img_id=$img_id");
+				}
+
 			} else {
 				echo "Error: " . $sql . "<br>" . $con->error;
 			}
