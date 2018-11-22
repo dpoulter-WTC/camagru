@@ -1,19 +1,22 @@
 <?php
-session_start();
+include_once('redirect.php');
 $counter = 0;
 if (isset($_POST['hidden'])){
   include('connect.php');
+
   $sql = "SELECT id FROM users WHERE login = '" . $_SESSION['curr_user'] ."'";
   $result = $con->query($sql);
   while($row = $result->fetch_assoc()) {
     $user_id = $row['id'];
   }
+  echo $user_id;
   $count = 0;
+
   while (file_exists("tmp/".$_SESSION['curr_user'] . $counter .'_edit.jpeg'))
   {
+
     if (isset($_POST['picture'.$counter]))
     {
-      echo $_POST['picture'.$counter];
       $data = file_get_contents("tmp/".$_SESSION['curr_user'] . $counter .'_edit.jpeg');
       unlink("tmp/".$_SESSION['curr_user'] . $counter .'_edit.jpeg');
       while (file_exists("photos/".$_SESSION['curr_user'] . $count .'.jpeg'))
@@ -23,7 +26,7 @@ if (isset($_POST['hidden'])){
       $url = "photos/".$_SESSION['curr_user'].$count.'.jpeg';
       file_put_contents($url, $data);
 
-      $sql = "INSERT INTO photos (userid, url, likes, comments, creation_date) VALUES ('$user_id','$url', '0' , '0', '".date("Y-m-d h:m:s")."')";
+      $sql = "INSERT INTO photos (userid, url, likes, comments, creation_date) VALUES ('$user_id','$url', '0' , '0', '".date("Y-m-d H:i:s")."')";
 			if ($con->query($sql) === TRUE) {
 				echo "New record created successfully";
 				header('Refresh: 0; URL=index.php');

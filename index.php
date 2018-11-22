@@ -104,11 +104,20 @@ if(!isset($_SESSION))
       <div class="responsive">
         <div class="gallery">
           <?php
-          echo '<a target="_blank" href="'.$row['url'].'">
-          <img src="'.$row['url'].'" alt="Cinque Terre" width="600" height="400">';
+          echo '<a target="_blank" href="image.php?img_id='.$row['id'].'">
+          <img src="'.$row['url'].'" alt="Error404" width="600" height="400">';
+          $sql2 = "SELECT * FROM likes WHERE imgid = '". $row['id'] ."'";
+    			$result2 = $con->query($sql2);
+          $num = $result2->num_rows;
+          $sql2 = "SELECT * FROM comments WHERE imgid = '". $row['id'] ."'";
+    			$result2 = $con->query($sql2);
+          $num2 = $result2->num_rows;
+          $sql3 = "SELECT login FROM users WHERE id = '" . $row['userid'] ."'";
+        	$result3 = $con->query($sql3);
+        	$row3 = $result3->fetch_assoc()
           ?>
           </a>
-          <div class="desc">Add a description of the image here</div>
+          <?php echo '<div class="desc"><p align="left"> '.$num.'❤ '.$num2.'✉︎<span style="float:right;">'.$row3['login'].'</span></p></div>';?>
         </div>
       </div>
       <?php

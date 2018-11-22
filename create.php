@@ -28,25 +28,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$sql = "SELECT * FROM users WHERE token = '". $code ."'";
 			$result = $con->query($sql);
 		}
-		$up = dirname($_SERVER[REQUEST_URI]);
+		$up = dirname($_SERVER['REQUEST_URI']);
 		$msg = "
 		<html>
 		<head>
-		<title>HTML email</title>
+		<title>Confirm Account</title>
 		</head>
 		<body>
-		<p>This email contains HTML Tags!</p>
-		<a href=http://$_SERVER[HTTP_HOST]$up/token.php?token=$code>Confirm</a>
-		<table>
-		<tr>
-		<th>Firstname</th>
-		<th>Lastname</th>
-		</tr>
-		<tr>
-		<td>John</td>
-		<td>Doe</td>
-		</tr>
-		</table>
+		<p>Hello ".$_POST['login']."</p>
+		</br>
+		<p>Please confirm your account by clicking the following link:</p>
+		</br>
+		<a href=http://$_SERVER[HTTP_HOST]$up/token.php?token=$code>Confirm Account</a>
 		</body>
 		</html>
 		";

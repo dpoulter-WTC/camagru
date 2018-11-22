@@ -40,38 +40,44 @@
   }
   include_once('header.php');
   ?>
-<div class="page">
-  <div class="box">
-  <div class="camera">
-    <video id="video"muted="muted" width="400" height="400">Video stream not available.</video>
-    <button id="startbutton">Take photo</button>
-  </div>
-  <div class="slider">
-    <?php
-    $counter = 0;
-    while (file_exists("tmp/".$_SESSION['curr_user'] . $counter .'_edit.jpeg'))
-    {
-      $src = "tmp/".$_SESSION['curr_user'] . $counter .'_edit.jpeg';
-      echo '<label style="margin-left: auto;	margin-right: auto; position:relative;">
-      <input type="checkbox" name="picture'.$counter.'" value="'.$counter.'" checked>
-      <img width="120" height="120" style="margin-left: auto;	margin-right: auto; position:relative;" src="'.$src.'" id="'.$counter.'">
-      </label>';
+  <div class="page">
+    <div class="box">
+      <div class="camera">
+        <video id="video"muted="muted" width="400" height="400">Video stream not available.</video>
+        <button id="startbutton">Take photo</button>
+      </div>
+      <div class="slider2">
+        <form action="photo_upload.php" method="post">
+          <div class="slider">
+            <?php
+            $counter = 0;
+            while (file_exists("tmp/".$_SESSION['curr_user'] . $counter .'_edit.jpeg'))
+            {
+              $src = "tmp/".$_SESSION['curr_user'] . $counter .'_edit.jpeg';
+              echo '<label style="margin-left: auto;	margin-right: auto; position:relative;">
+              <input type="checkbox" name="picture'.$counter.'" value="'.$counter.'" checked>
+              <img width="120" height="120" style="margin-left: auto;	margin-right: auto; position:relative;" src="'.$src.'" id="'.$counter.'">
+              </label>';
 
-      $counter++;
-    }
-    ?>
+              $counter++;
+            }
+            ?>
+          </div>
+          <input type="hidden" name="hidden" value="1">
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <div class = "next">
+        <button id="continue">continue</button>
+    </div>
   </div>
-</div>
-</div>
   <canvas id="canvas" class = >
   </canvas>
   <div class="output">
     <img id="photo" alt="The screen capture will appear in this box.">
   </div>
-  <form action="photo_upload.php" method="post">
-  <input type="hidden" name="hidden" value="1">
-  <input type="submit" value="Submit">
-</form>
-  <button id="continue">continue</button>
+
+
 </body>
 </html>

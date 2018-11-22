@@ -8,5 +8,12 @@ try {
     echo 'Connection failed: ' . $e->getMessage();
 }
 $sql = file_get_contents('data.sql');
-$qr = $dbh->exec($sql);
+if ($qr = $dbh->exec($sql))
+{
+  echo "Database setup complete.";
+  header("refresh:2;url=../index.php");
+}
+else {
+  echo "Error with setup, please try again.";
+}
 ?>

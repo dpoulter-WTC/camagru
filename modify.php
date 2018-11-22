@@ -1,77 +1,57 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Edit</title>
-	<link rel="stylesheet" href="style.css"/>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="style/style.css"/>
+	<title>Modify Account</title>
 </head>
-<?php
-require_once('auth.php');
-session_start();
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-{
-	function validate_form($p)
-	{
-		if ($p['login'] && $p['oldpw'] && $p['newpw'] && $p['submit'])
-		if ($p['submit'] == 'OK')
-		return true;
-		return false;
-	}
-	function find_user($logins, $login, $oldhash)
-	{
-		foreach ($logins as $k => $v)
-		if ($v['login'] == $login && $v['passwd'] == $oldhash)
-		return $k;
-		return false;
-	}
-	$file = '../private/passwd';
-	$valid = validate_form($_POST);
-	$logins = false;
-	if (file_exists($file))
-	$logins = unserialize(file_get_contents($file));
-	if ($valid && $logins)
-	{
-		$oldhash = hash('whirlpool', $_POST['oldpw']);
-		if (($user = find_user($logins, $_POST['login'], $oldhash)))
-		{
-			$logins[$user]['passwd'] = hash('whirlpool', $_POST['newpw']);
-			file_put_contents($file, serialize($logins));
-			echo "Successfully changed\n";
-		}
-		else { echo "ERROR\n"; }
-	}
-	else { echo "ERROR\n"; }
-}
-?>
 <body>
-	<div id="body_wrapper">
-		<div id="wrapper">
-			<?php include_once('header2.php');
-			?>
-			<div id="middle_subpage">
-				<h2>Login</h2>
-			</div>
-			<div id="main"><span class="tm_top"></span>
-				<form action="modify.php" method="POST">
-					<div class="mid_box">
-					Username: <input type="text" name="login" value="">
-					<br />
-					Old Password: <input type="text" name="oldpw" value="">
-					<br />
-					New Password: <input type="text" name="newpw" value="">
-					<br />
-					<input type="submit" name="submit" value="OK">
-				</div>
-				</form>
-				<div class="cleaner"></div>
-				<div class="cleaner"></div>
-				<div class="cleaner"></div>
-			</div>
-			<div id="tm_bottom"></div>
-			<div id="footer">
-				Copyright © 2018 <a href="#">WTC_Students</a>
-			</div>
-		</div>
-		<div class="cleaner"></div>
-	</div>
+	<?php
+	include('connect.php');
+	include_once('redirect.php');
+	include_once('header.php');
+	if ($_SERVER["REQUEST_METHOD"] == "POST")
+	{
+		if (isset($_POST['notification']))
+		{
+			$notify = $_POST['notification'];
+			if ($notify == 0)
+			{
+				$sql = "UPDATE users SET notification = 0 WHERE login = '".$_SESSION['curr_user']."'";
+				if ($con->query($sql) === TRUE) {
+					header("Refresh: 0; URL=modify.php");
+				} else {
+					echo "Error: " . $sql . "<br>" . $con->error;
+				}
+			} else {
+				$sql = "UPDATE users SET notification = 1 WHERE login = '".$_SESSION['curr_user']."'";
+				if ($con->query($sql) === TRUE) {
+					header("Refresh: 0; URL=modify.php");
+				} else {
+					echo "Error: " . $sql . "<br>" . $con->error;
+				}
+			}
+		}
+	}
+	?>
+	<a href="modifylog.php">Change Username</a>
+  <a href="modifypw.php">Change Password</a>
+	<form action="modify.php" method="post">
+		<?php
+		$sql3 = "SELECT * FROM users WHERE login = '" . $_SESSION['curr_user'] . "'";
+		$result3 = $con->query($sql3);
+		while($row3 = $result3->fetch_assoc()) {
+			$notif = $row3['notification'];
+		}
+		if ($notif == 1)
+		{
+			echo '<input type="hidden" name="notification" value="0">
+			<input type="submit" value="Turn email notifications off">';
+		}else {
+			echo '<input type="hidden" name="notification" value="1">
+			<input type="submit" value="Turn email notifications on">';
+		}
+		?>
+	</form>
 </body>
 </html>
