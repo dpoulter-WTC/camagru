@@ -42,11 +42,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	<?php
 	include_once('header.php');
 	?>
+	<div class = "create">
 	<h2>Login</h2>
 	<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
 		Email : <input type="text" name="email" value="" id="email" required/><br />
 		Password : <input type="password" name="passwd" id="passwd" value="" required/><br />
-		<input type= "submit" name="submit" value="OK" id= "login"/>
+		<button id="submit">Login</button>
 	</form>
+	<a href="pw_reset.php">Forgot Password</a>
+</div>
 </body>
 </html>

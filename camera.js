@@ -97,7 +97,7 @@
           }
         };
         xhr.send(encodeURI('photo=' + dataURL));
-
+        move_on();
       } else {
         clearphoto();
       }

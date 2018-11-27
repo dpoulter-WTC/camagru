@@ -21,8 +21,8 @@
 .camera {
   width:600px;
   margin-top: 10px;
- display: inline-block;
- float:left;
+  display: inline-block;
+  float:left;
 }
 
 .output {
@@ -70,31 +70,31 @@
 }
 
 .box {
- width: calc(100% - 58.641px);
- position:relative;
- margin: 0 auto;
+  width: 810px;
+  position:relative;
+  margin: 0 auto;
 }
 
 .slider {
   width: 200px;
   height: 480px;
   margin-top: 10px;
- display: inline-block;
+  display: inline-block;
   overflow-y: scroll
 }
 .slider2 {
   width: 200px;
   height: 480px;
   margin-left: 10px;
- display: inline-block;;
+  display: inline-block;;
 }
 
 .next {
   height:20px;
   margin-right: 10px;
- display: inline-block;
- float: right;
- position:absolute;
- margin-bottom: 0%;
- margin-right: 7%;
+  display: inline-block;
+  float: right;
+  position:absolute;
+  margin-bottom: 0%;
+  margin-right: 7%;
 }

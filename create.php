@@ -75,20 +75,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	<?php
 	include_once('header.php');
 	?>
-	<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST" id = "form">
-		<h1>Register</h1><br>
-		<label for="email"><b>Email</b></label>
-		<input type="email" placeholder="Enter Email" name="email" id="email" required>
-		<br />
-		<label for="login"><b>Username</b></label>
-		<input type="text" placeholder="Enter Username" name="login" id="login" required>
-		<br />
-		<label for="passwd"><b>Password</b></label>
-		<input type="password" placeholder="Enter Password" name="passwd" id="passwd" required>
-		<br />
-		<label for="cpasswd"><b>Confirm</b></label>
-		<input type="password" placeholder="Confirm Password" name="cpasswd" id="cpasswd" required>
-		<button type=button id="register">Register</button>
-	</form>
+	<div class = "create">
+		<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST" id = "form">
+			<h1>Register</h1><br>
+			<label for="email"><b>Email</b></label>
+			<input
+			type="text"
+			pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+			placeholder="Enter Email" name="email" id="email"
+			required>
+			<br />
+			<label for="login"><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="login" id="login" required>
+			<br />
+			<label for="passwd"><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="passwd" id="passwd" required>
+			<br />
+			<label for="cpasswd"><b>Confirm</b></label>
+			<input type="password" placeholder="Confirm Password" name="cpasswd" id="cpasswd" required>
+			<button type=button id="register">Register</button>
+		</form>
+	</div>
 </body>
 </html>

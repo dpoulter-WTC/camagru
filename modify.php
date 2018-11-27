@@ -34,8 +34,9 @@
 		}
 	}
 	?>
-	<a href="modifylog.php">Change Username</a>
-  <a href="modifypw.php">Change Password</a>
+	<div class = "create">
+	<a style = "font-size: 21px" href="modifylog.php">Change Username</a>
+  <a style = "font-size: 21px" href="modifypw.php">Change Password</a>
 	<form action="modify.php" method="post">
 		<?php
 		$sql3 = "SELECT * FROM users WHERE login = '" . $_SESSION['curr_user'] . "'";
@@ -51,7 +52,9 @@
 			echo '<input type="hidden" name="notification" value="1">
 			<input type="submit" value="Turn email notifications on">';
 		}
+
 		?>
+	</div>
 	</form>
 </body>
 </html>

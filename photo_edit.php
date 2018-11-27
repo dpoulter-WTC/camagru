@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <link rel="stylesheet" href="style/style.css"/>
+  <style>
+  input[type="radio"] {
+    display: none
+  }
+  img {
+    border: 4px solid red;
+  }
+  input[type="radio"]:checked:before + img
+  {
+    background: green;
+    border: 4px solid red;
+  }
+  input[type="radio"]:checked + img
+  {
+    border-color:green;
+    border: 4px solid green;
+  }
+  .checkbox label {
+    margin-bottom: 20px !important;
+  }
+  </style>
+</head>
 <body>
   <?php
-  if(!isset($_SESSION))
-  {
-    session_start();
-  }
+  include_once('redirect.php');
+  include_once('header.php');
   $counter = 0;
   while (file_exists("tmp/".$_SESSION['curr_user'] . $counter .'.jpeg'))
   {
@@ -16,40 +38,47 @@
     header("Location: index.php");
     die();
   }
-  echo '<img id="original" src="tmp/'. $_SESSION['curr_user'] . $counter .'.jpeg" alt="Original Image">';
-  $counter = 1;
-  while (file_exists("resources/stickers/sticker (". $counter .').png'))
-  {
-    $src = "resources/stickers/sticker (". $counter .').png';
-    echo '<label>
-    <input type="radio" name="sticker" value="1">
-    <img width="100" height="100" src="'.$src.'" id="sticker-'.$counter.'">
-    </label>';
-    $counter++;
-  }
+  echo '<img id="original" src="tmp/'. $_SESSION['curr_user'] . $counter .'.jpeg" alt="Original Image" hidden>';
   ?>
-  <button onclick="addSticker(ctx, 'topLeft')">Add Sticker</button>
-
-  <?php
-  $counter = 1;
-  while (file_exists("resources/borders/border (". $counter .').png'))
-  {
-    $src = "resources/borders/border (". $counter .').png';
-    echo '<label>
-    <input type="radio" name="border" value="1">
-    <img width="100" height="100" src="'.$src.'" id="border-'. $counter .'">
-    </label>';
-    $counter++;
-  }
-  ?>
-  <button onclick="addBorder(ctx)">Add Border</button>
+  <div class = "center">
+    <div class="slider" style="direction: rtl;">
+      <?php
+      $counter = 1;
+      while (file_exists("resources/stickers/sticker (". $counter .').png'))
+      {
+        $src = "resources/stickers/sticker (". $counter .').png';
+        echo '<label>
+        <input type="radio" name="sticker" value="1">
+        <img width="100" height="100" src="'.$src.'" id="sticker-'.$counter.'">
+        </label>';
+        $counter++;
+      }
+      ?>
+      <button onclick="addSticker(ctx, 'topLeft')">Top Left</button>
+      <button onclick="addSticker(ctx, 'topRight')">Top Right</button>
+      <button onclick="addSticker(ctx, 'bottomLeft')">Bottom Left</button>
+      <button onclick="addSticker(ctx, 'bottomRight')">Bottom Right</button>
+    </div>
+    <canvas id="myCanvas" width="500" height="500" style="border:1px solid #d3d3d3;">
+    </canvas>
+    <div class="slider">
+      <?php
+      $counter = 1;
+      while (file_exists("resources/borders/border (". $counter .').png'))
+      {
+        $src = "resources/borders/border (". $counter .').png';
+        echo '<label>
+        <input type="radio" name="border" value="1">
+        <img width="100" height="100" src="'.$src.'" id="border-'. $counter .'">
+        </label>';
+        $counter++;
+      }
+      ?>
+      <button onclick="addBorder(ctx)">Add Border</button>
+    </div>
+  </div>
   <button onclick="ctx.drawImage(original, -83.33, 0, 666.66666666, 500)">Reset</button>
   <button onclick="saveImage()">Save Image</button>
-
-  <p>Canvas:</p>
-  <canvas id="myCanvas" width="500" height="500" style="border:1px solid #d3d3d3;">
-    Your browser does not support the HTML5 canvas tag.
-  </canvas>
 
   <script>
   window.onload = function() {
@@ -73,28 +102,23 @@
         var y;
         if (position == 'topLeft')
         {
-          x = 10;
-          y = 10;
+          x = 40;
+          y = 40;
         }
         else if (position == 'topRight')
         {
-          x = 440;
-          y = 10;
+          x = 360;
+          y = 40;
         }
         else if (position == 'bottomLeft')
         {
-          x = 10;
-          y = 440;
+          x = 40;
+          y = 360;
         }
         else if (position == 'bottomRight')
         {
-          x = 440;
-          y = 440;
-        }
-        else if (position == 'centre')
-        {
-          x = 225;
-          y = 225;
+          x = 360;
+          y = 360;
         }
         ctx2.drawImage(sticker, x, y, 100, 100);
         stuck = 1;

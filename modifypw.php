@@ -43,8 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	<?php
 	include_once('header.php');
 	?>
+	<div class = "create">
 	<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST" id = "form">
-		<h1>Register</h1><br>
+		<h1>Change Password</h1><br>
 		<label for="email"><b>Email</b></label>
 		<input type="email" placeholder="Enter Email" name="email" id="email" required>
 		<br />
@@ -58,5 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		<input type="password" placeholder="Confirm New Password" name="cnewpw" id="cnewpw" required>
 		<button type=button id="button_submit">Submit</button>
 	</form>
+</div>
 </body>
 </html>

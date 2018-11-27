@@ -33,7 +33,7 @@
 			} else {
 				$sql = "DELETE FROM likes WHERE userid = $user_id";
 				$con->query($sql);
-				$sql = "UPDATE photos SET likes = likes + 1 WHERE id='$img_id'";
+				$sql = "UPDATE photos SET likes = likes - 1 WHERE id='$img_id'";
 				if ($con->query($sql) === TRUE) {
 					header("Refresh: 0; URL=image.php?img_id=$img_id");
 				} else {
@@ -132,7 +132,7 @@
 				{
 					echo '<input type="hidden" name="hidden" value="'.$_GET['img_id'].'">
 					<input type="hidden" name="like" value="0">';
-					$sql2 = "SELECT * FROM likes WHERE imgid = '". $row['id'] ."'";
+					$sql2 = "SELECT * FROM likes WHERE imgid = '". $_GET['img_id'] ."'";
 					$result2 = $con->query($sql2);
 					$num = $result2->num_rows;
 					echo '<p align="left"> '.$num.'❤</p>

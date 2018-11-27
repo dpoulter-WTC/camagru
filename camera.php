@@ -45,6 +45,10 @@
       <div class="camera">
         <video id="video"muted="muted" width="400" height="400">Video stream not available.</video>
         <button id="startbutton">Take photo</button>
+        <form action="photo_upload.php" method="post" enctype="multipart/form-data">
+          <input type="file" name="upload" id="upload">
+          <input type="submit" value="Upload Image" name="submit">
+        </form>
       </div>
       <div class="slider2">
         <form action="photo_upload.php" method="post">
@@ -64,18 +68,15 @@
             ?>
           </div>
           <input type="hidden" name="hidden" value="1">
-          <input type="submit" value="Submit">
+          <input type="submit" value="Upload selected images">
         </form>
       </div>
-    </div>
-    <div class = "next">
-        <button id="continue">continue</button>
     </div>
   </div>
   <canvas id="canvas" class = >
   </canvas>
   <div class="output">
-    <img id="photo" alt="The screen capture will appear in this box.">
+    <img id="photo" alt="The screen capture will appear in this box." hidden>
   </div>
 
 

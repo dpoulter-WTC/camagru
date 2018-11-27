@@ -23,11 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		if ($result->num_rows === 1) {
 			$sql = "UPDATE `users` SET `login` ='". $login . "'WHERE `email` = '" . $_POST['email']."'";
 			if ($con->query($sql) === TRUE) {
+				header("Location: logout_1.php");
 				echo "Username changed successfully";
 			} else {
 				echo "Error: " . $sql . "<br>" . $con->error;
 			}
-			echo "OK\n";
+			echo "\n";
 		}
 	}
 }
@@ -36,8 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	<?php
 	include_once('header.php');
 	?>
+	<div class = "create">
 	<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST" id = "form">
-		<h1>Register</h1><br>
+		<h1>Change Username</h1><br>
 		<label for="email"><b>Email</b></label>
 		<input type="email" placeholder="Enter Email" name="email" id="email" required>
 		<br />
@@ -48,5 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		<input type="text" placeholder="Enter New Username" name="newlog" id="newlog" required>
 	</form>
 	<button type="submit" form="form" value="Submit">Submit</button>
+</div>
 </body>
 </html>

@@ -12,7 +12,16 @@
 		if (pass.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})"))
 		{
 			if (pass === cpass)
-				document.getElementById("form").submit();
+			{
+				var email = document.getElementById('email').value;
+				var login = document.getElementById('login').value;
+				if ((email !== "") && (login !== ""))
+				{
+					document.getElementById("form").submit();
+				}else {
+					alert("Please enter all the information");
+				}
+			}
 			else {
 				alert("Please enter the same password");
 			}
