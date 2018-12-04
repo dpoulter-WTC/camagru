@@ -6,7 +6,6 @@
   var canvas = null;
   var photo = null;
   var startbutton = null;
-  var cont = null;
 
   function startup() {
     video = document.getElementById('video');
@@ -14,7 +13,6 @@
     var ctx = canvas.getContext('2d');
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
-    cont = document.getElementById('continue');
     navigator.getMedia = ( navigator.getUserMedia ||
       navigator.webkitGetUserMedia ||
       navigator.mozGetUserMedia ||
@@ -60,9 +58,6 @@
         ev.preventDefault();
       }, false);
 
-      cont.addEventListener('click', function(ev){
-        move_on();
-      }, false);
       clearphoto();
     }
     function clearphoto() {
